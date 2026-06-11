@@ -81,11 +81,14 @@ export default function ApplyPage({ hash }) {
     setRegId(generatedId);
 
     try {
-      // Check if phone number is already registered
+      // Check if phone number is already registered (matching the last 10 digits to ignore country codes/spaces)
+      const cleanedPhone = formData.phone.replace(/\D/g, '');
+      const searchPhone = cleanedPhone.length >= 10 ? cleanedPhone.slice(-10) : cleanedPhone;
+
       const { data: existing, error: checkError } = await supabase
         .from('applications')
         .select('id')
-        .eq('phone', formData.phone)
+        .like('phone', `%${searchPhone}`)
         .limit(1);
 
       if (checkError) {
