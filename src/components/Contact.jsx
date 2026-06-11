@@ -7,12 +7,14 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', phone: '', msg: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const phoneNumbers = ['9159417945', '9585417945', '9655757134', '9585116455'];
   const primaryPhone = '9159417945';
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (submitError) setSubmitError('');
   };
 
   const handleSubmit = async (e) => {
@@ -37,25 +39,29 @@ export default function Contact() {
         throw checkError;
       }
 
-      if (!existing || existing.length === 0) {
-        const { error } = await supabase.from('applications').insert([
-          {
-            name: formData.name,
-            phone: formData.phone,
-            email: null,
-            gender: null,
-            dob: null,
-            qualification: 'Contact Form',
-            course: 'Enquiry',
-            address: formData.msg || 'No message provided',
-            application_id: generatedId,
-            status: 'New'
-          }
-        ]);
+      if (existing && existing.length > 0) {
+        setSubmitError('This mobile number is already registered! Our admissions office will get in touch with you shortly.');
+        setIsSubmitting(false);
+        return;
+      }
 
-        if (error) {
-          throw error;
+      const { error } = await supabase.from('applications').insert([
+        {
+          name: formData.name,
+          phone: formData.phone,
+          email: null,
+          gender: null,
+          dob: null,
+          qualification: 'Contact Form',
+          course: 'Enquiry',
+          address: formData.msg || 'No message provided',
+          application_id: generatedId,
+          status: 'New'
         }
+      ]);
+
+      if (error) {
+        throw error;
       }
 
       setIsSubmitted(true);
@@ -346,6 +352,21 @@ export default function Contact() {
                       placeholder="Tell us what you would like to ask..."
                     />
                   </div>
+
+                  {submitError && (
+                    <div style={{ 
+                      backgroundColor: 'rgba(239, 68, 68, 0.1)', 
+                      border: '1px solid var(--danger)', 
+                      color: 'var(--danger)', 
+                      padding: '12px 14px', 
+                      borderRadius: 'var(--radius-sm)', 
+                      fontSize: '0.9rem', 
+                      marginBottom: '14px',
+                      textAlign: 'left'
+                    }}>
+                      {submitError}
+                    </div>
+                  )}
 
                   <button 
                     type="submit" 

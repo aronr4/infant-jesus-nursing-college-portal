@@ -18,6 +18,7 @@ export default function ApplyPage({ hash }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [regId, setRegId] = useState('');
   const [countdown, setCountdown] = useState(8);
+  const [submitError, setSubmitError] = useState('');
 
   // Auto-redirect to home page after successful submission
   useEffect(() => {
@@ -65,6 +66,7 @@ export default function ApplyPage({ hash }) {
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (submitError) setSubmitError('');
   };
 
   const handleFormSubmit = async (e) => {
@@ -90,25 +92,30 @@ export default function ApplyPage({ hash }) {
         throw checkError;
       }
 
-      if (!existing || existing.length === 0) {
-        const { error } = await supabase.from('applications').insert([
-          {
-            name: formData.name,
-            phone: formData.phone,
-            email: formData.email || null,
-            gender: formData.gender || null,
-            dob: formData.dob || null,
-            qualification: formData.qualification,
-            course: formData.course,
-            address: formData.address,
-            application_id: generatedId,
-            status: 'New'
-          }
-        ]);
+      if (existing && existing.length > 0) {
+        setSubmitError('This mobile number is already registered! Our admissions office will get in touch with you shortly.');
+        setIsSubmitting(false);
+        window.scrollTo({ top: document.querySelector('.apply-card').offsetTop - 100, behavior: 'smooth' });
+        return;
+      }
 
-        if (error) {
-          throw error;
+      const { error } = await supabase.from('applications').insert([
+        {
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email || null,
+          gender: formData.gender || null,
+          dob: formData.dob || null,
+          qualification: formData.qualification,
+          course: formData.course,
+          address: formData.address,
+          application_id: generatedId,
+          status: 'New'
         }
+      ]);
+
+      if (error) {
+        throw error;
       }
 
       setIsSubmitted(true);
@@ -370,6 +377,21 @@ export default function ApplyPage({ hash }) {
                       />
                     </div>
                   </div>
+
+                  {submitError && (
+                    <div style={{ 
+                      backgroundColor: 'rgba(239, 68, 68, 0.1)', 
+                      border: '1px solid var(--danger)', 
+                      color: 'var(--danger)', 
+                      padding: '12px 14px', 
+                      borderRadius: 'var(--radius-sm)', 
+                      fontSize: '0.9rem', 
+                      marginBottom: '14px',
+                      textAlign: 'left'
+                    }}>
+                      {submitError}
+                    </div>
+                  )}
 
                   <button 
                     type="submit" 

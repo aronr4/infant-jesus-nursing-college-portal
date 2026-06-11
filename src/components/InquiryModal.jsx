@@ -8,6 +8,7 @@ export default function InquiryModal() {
   const [formData, setFormData] = useState({ name: '', phone: '', qualification: '', course: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
     // Check if user has already dismissed or submitted the form
@@ -29,6 +30,7 @@ export default function InquiryModal() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (submitError) setSubmitError('');
   };
 
   const handleSubmit = async (e) => {
@@ -53,25 +55,29 @@ export default function InquiryModal() {
         throw checkError;
       }
 
-      if (!existing || existing.length === 0) {
-        const { error } = await supabase.from('applications').insert([
-          {
-            name: formData.name,
-            phone: formData.phone,
-            email: null,
-            gender: null,
-            dob: null,
-            qualification: formData.qualification,
-            course: formData.course,
-            address: 'Popup Inquiry',
-            application_id: generatedId,
-            status: 'New'
-          }
-        ]);
+      if (existing && existing.length > 0) {
+        setSubmitError('This mobile number is already registered! Our admissions office will get in touch with you shortly.');
+        setIsSubmitting(false);
+        return;
+      }
 
-        if (error) {
-          throw error;
+      const { error } = await supabase.from('applications').insert([
+        {
+          name: formData.name,
+          phone: formData.phone,
+          email: null,
+          gender: null,
+          dob: null,
+          qualification: formData.qualification,
+          course: formData.course,
+          address: 'Popup Inquiry',
+          application_id: generatedId,
+          status: 'New'
         }
+      ]);
+
+      if (error) {
+        throw error;
       }
 
       setIsSubmitted(true);
@@ -249,6 +255,21 @@ export default function InquiryModal() {
                         <option value="DIP">Diploma in Pharmacy (DIP)</option>
                       </select>
                     </div>
+
+                    {submitError && (
+                      <div style={{ 
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)', 
+                        border: '1px solid var(--danger)', 
+                        color: 'var(--danger)', 
+                        padding: '10px 12px', 
+                        borderRadius: 'var(--radius-sm)', 
+                        fontSize: '0.85rem', 
+                        marginBottom: '14px',
+                        textAlign: 'left'
+                      }}>
+                        {submitError}
+                      </div>
+                    )}
 
                     <button 
                       type="submit" 
