@@ -279,7 +279,7 @@ export default function InquiryModal() {
                         Enquiry Submitted!
                       </h4>
                       <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                        Thank you for your interest. Our admissions office will contact you shortly on <strong>{formData.phone}</strong>.
+                        Thank you for your interest. Our admissions office will contact you shortly.
                       </p>
                     </div>
                   </motion.div>
