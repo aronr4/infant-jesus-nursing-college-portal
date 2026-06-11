@@ -166,54 +166,47 @@ export default function LoadingScreen() {
                   width: '100%',
                   height: '100%',
                   borderRadius: '50%',
-                  backgroundColor: '#FFFFFF',
-                  border: '3px solid var(--primary)',
-                  padding: '10px',
-                  boxShadow: '0 12px 40px rgba(10, 102, 194, 0.25)',
+                  overflow: 'hidden',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  overflow: 'hidden',
                   position: 'relative',
                   zIndex: 2
                 }}
               >
-                {/* Logo Image */}
-                <div style={{ position: 'relative', width: '90%', height: '90%', overflow: 'hidden', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <img
-                    src="/logo.png"
-                    alt="College Logo"
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'contain',
-                      imageRendering: '-webkit-optimize-contrast',
-                      imageRendering: 'crisp-edges'
-                    }}
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.parentElement.innerHTML = '<div style="font-weight:900;color:var(--primary);font-size:1.5rem">IJ</div>';
-                    }}
-                  />
-                  
-                  {/* Premium Diagonal Glint Shimmer Overlay */}
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0) 100%)',
-                      zIndex: 3,
-                      animation: 'logo-glint 2s infinite linear 0.8s',
-                      pointerEvents: 'none'
-                    }}
-                  />
-                </div>
+                <img
+                  src="/logo.png"
+                  alt="College Logo"
+                  style={{ 
+                    width: '100%', 
+                    height: '100%', 
+                    objectFit: 'contain',
+                    imageRendering: '-webkit-optimize-contrast',
+                    imageRendering: 'crisp-edges'
+                  }}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<div style="font-weight:900;color:var(--primary);font-size:1.5rem">IJ</div>';
+                  }}
+                />
+                
+                {/* Premium Diagonal Glint Shimmer Overlay */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0) 100%)',
+                    zIndex: 3,
+                    animation: 'logo-glint 2s infinite linear 0.8s',
+                    pointerEvents: 'none'
+                  }}
+                />
               </motion.div>
 
               {/* Snap Flash impact wave overlay */}

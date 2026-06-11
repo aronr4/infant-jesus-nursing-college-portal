@@ -35,9 +35,6 @@ export default function Footer() {
                 height: '70px',
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '2.5px solid rgba(255,255,255,0.4)',
-                boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
-                backgroundColor: '#fff',
                 flexShrink: 0
               }}>
                 <img

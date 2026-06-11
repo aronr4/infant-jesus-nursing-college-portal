@@ -189,9 +189,6 @@ export default function Navbar() {
                 flexShrink: 0,
                 borderRadius: '50%',
                 overflow: 'hidden',
-                border: '2.5px solid var(--primary)',
-                boxShadow: '0 2px 10px rgba(10,102,194,0.2)',
-                backgroundColor: '#fff',
                 transition: 'all 0.3s ease'
               }}
               className="brand-logo-frame"
