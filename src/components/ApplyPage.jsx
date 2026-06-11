@@ -79,23 +79,36 @@ export default function ApplyPage({ hash }) {
     setRegId(generatedId);
 
     try {
-      const { error } = await supabase.from('applications').insert([
-        {
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email || null,
-          gender: formData.gender || null,
-          dob: formData.dob || null,
-          qualification: formData.qualification,
-          course: formData.course,
-          address: formData.address,
-          application_id: generatedId,
-          status: 'New'
-        }
-      ]);
+      // Check if phone number is already registered
+      const { data: existing, error: checkError } = await supabase
+        .from('applications')
+        .select('id')
+        .eq('phone', formData.phone)
+        .limit(1);
 
-      if (error) {
-        throw error;
+      if (checkError) {
+        throw checkError;
+      }
+
+      if (!existing || existing.length === 0) {
+        const { error } = await supabase.from('applications').insert([
+          {
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email || null,
+            gender: formData.gender || null,
+            dob: formData.dob || null,
+            qualification: formData.qualification,
+            course: formData.course,
+            address: formData.address,
+            application_id: generatedId,
+            status: 'New'
+          }
+        ]);
+
+        if (error) {
+          throw error;
+        }
       }
 
       setIsSubmitted(true);

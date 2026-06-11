@@ -26,23 +26,36 @@ export default function Contact() {
     const generatedId = `IJ-${Math.floor(100000 + Math.random() * 900000)}`;
 
     try {
-      const { error } = await supabase.from('applications').insert([
-        {
-          name: formData.name,
-          phone: formData.phone,
-          email: null,
-          gender: null,
-          dob: null,
-          qualification: 'Contact Form',
-          course: 'Enquiry',
-          address: formData.msg || 'No message provided',
-          application_id: generatedId,
-          status: 'New'
-        }
-      ]);
+      // Check if phone number is already registered
+      const { data: existing, error: checkError } = await supabase
+        .from('applications')
+        .select('id')
+        .eq('phone', formData.phone)
+        .limit(1);
 
-      if (error) {
-        throw error;
+      if (checkError) {
+        throw checkError;
+      }
+
+      if (!existing || existing.length === 0) {
+        const { error } = await supabase.from('applications').insert([
+          {
+            name: formData.name,
+            phone: formData.phone,
+            email: null,
+            gender: null,
+            dob: null,
+            qualification: 'Contact Form',
+            course: 'Enquiry',
+            address: formData.msg || 'No message provided',
+            application_id: generatedId,
+            status: 'New'
+          }
+        ]);
+
+        if (error) {
+          throw error;
+        }
       }
 
       setIsSubmitted(true);
