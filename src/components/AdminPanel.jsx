@@ -328,7 +328,17 @@ export default function AdminPanel() {
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '2px solid var(--primary)', overflow: 'hidden', backgroundColor: '#fff', flexShrink: 0 }}>
-                  <img src="/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img 
+                    src="/logo.png" 
+                    alt="Logo" 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'contain',
+                      imageRendering: '-webkit-optimize-contrast',
+                      imageRendering: 'crisp-edges'
+                    }} 
+                  />
                 </div>
                 <div>
                   <h1 style={{ fontSize: '1.05rem', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.2 }}>Infant Jesus Nursing College</h1>

@@ -46,10 +46,11 @@ export default function Footer() {
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
+                    objectFit: 'contain',
                     objectPosition: 'center',
                     display: 'block',
-                    transform: 'scale(1.08)'
+                    imageRendering: '-webkit-optimize-contrast',
+                    imageRendering: 'crisp-edges'
                   }}
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />

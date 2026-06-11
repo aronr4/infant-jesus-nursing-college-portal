@@ -183,7 +183,13 @@ export default function LoadingScreen() {
                   <img
                     src="/logo.png"
                     alt="College Logo"
-                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'contain',
+                      imageRendering: '-webkit-optimize-contrast',
+                      imageRendering: 'crisp-edges'
+                    }}
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.parentElement.innerHTML = '<div style="font-weight:900;color:var(--primary);font-size:1.5rem">IJ</div>';
