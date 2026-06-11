@@ -27,7 +27,7 @@
   --shadow-xl: 0 25px 50px -12px rgba(10, 102, 194, 0.15);
   
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.88);
   --glass-border: rgba(255, 255, 255, 0.4);
   --glass-shadow: 0 8px 32px 0 rgba(10, 102, 194, 0.06);
   
@@ -62,7 +62,7 @@
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
   --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
   
-  --glass-bg: rgba(10, 15, 29, 0.65);
+  --glass-bg: rgba(10, 15, 29, 0.88);
   --glass-border: rgba(30, 41, 59, 0.5);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   
@@ -208,8 +208,8 @@ a:hover {
 /* Glassmorphism Classes */
 .glass-panel {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
