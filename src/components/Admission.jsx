@@ -220,7 +220,7 @@ export default function Admission() {
               </div>
 
               <a 
-                href="#apply" 
+                href="/apply" 
                 className="btn btn-primary pulse-btn"
                 style={{ 
                   width: '100%', 

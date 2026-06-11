@@ -239,7 +239,7 @@ export default function AdminPanel() {
                 <li>Copy the URL and Anon Key, paste them into <code style={{ fontWeight: 700 }}>config.js</code>, and save the file.</li>
               </ol>
             </div>
-            <a href="#" className="btn btn-secondary" style={{ width: '100%' }}>Back to Homepage</a>
+            <a href="/" className="btn btn-secondary" style={{ width: '100%' }}>Back to Homepage</a>
           </div>
         </div>
       </div>
@@ -315,7 +315,7 @@ export default function AdminPanel() {
               </button>
             </form>
             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <a href="#" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Back to Website</a>
+              <a href="/" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600 }}>Back to Website</a>
             </div>
           </motion.div>
         </div>

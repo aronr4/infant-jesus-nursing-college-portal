@@ -19,52 +19,40 @@ import ApplyPage from './components/ApplyPage';
 import AdminPanel from './components/AdminPanel';
 
 function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname || '/');
   const [currentHash, setCurrentHash] = useState(window.location.hash || '#');
 
   useEffect(() => {
     const handleHashChange = () => {
       setCurrentHash(window.location.hash || '#');
-      // Scroll to top of the page when view changes
-      window.scrollTo(0, 0);
     };
-
     window.addEventListener('hashchange', handleHashChange);
-
-    // Initial check on load
-    if (window.location.hash.startsWith('#apply') || window.location.hash.startsWith('#admin')) {
-      window.scrollTo(0, 0);
-    }
-
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const isApplyPage = currentHash.startsWith('#apply');
-  const isAdminPage = currentHash.startsWith('#admin');
-  const [wasApplyPage, setWasApplyPage] = useState(false);
+  const isApplyPage = currentPath.startsWith('/apply');
+  const isAdminPage = currentPath.startsWith('/admin');
 
-  // Track if we were previously on the Apply page
+  // Scroll to target hash on load (e.g. returning to /#courses from /apply)
   useEffect(() => {
-    if (isApplyPage) {
-      setWasApplyPage(true);
-    }
-  }, [isApplyPage]);
-
-  // Handle smooth scrolling when navigating from Apply page back to a homepage section
-  useEffect(() => {
-    if (!isApplyPage && wasApplyPage && currentHash && currentHash !== '#') {
+    if (!isApplyPage && !isAdminPage && currentHash && currentHash !== '#') {
       const elementId = currentHash.replace('#', '').split('?')[0];
       const element = document.getElementById(elementId);
       if (element) {
         const timer = setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
-          setWasApplyPage(false); // reset transition state
-        }, 150);
+        }, 300);
         return () => clearTimeout(timer);
       }
-    } else if (!isApplyPage && currentHash === '#') {
-      setWasApplyPage(false); // reset if returning to top of home
     }
-  }, [isApplyPage, currentHash, wasApplyPage]);
+  }, [currentPath, currentHash, isApplyPage, isAdminPage]);
+
+  // Handle auto-scrolling to top on portal page entries
+  useEffect(() => {
+    if (isApplyPage || isAdminPage) {
+      window.scrollTo(0, 0);
+    }
+  }, [isApplyPage, isAdminPage]);
 
   return (
     <>
@@ -82,7 +70,7 @@ function App() {
       {isAdminPage ? (
         <AdminPanel />
       ) : isApplyPage ? (
-        <ApplyPage hash={currentHash} />
+        <ApplyPage hash={window.location.search || ''} />
       ) : (
         <main>
           <Hero />

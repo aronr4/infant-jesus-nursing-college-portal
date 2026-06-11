@@ -26,7 +26,7 @@ export default function ApplyPage({ hash }) {
         setCountdown(prev => {
           if (prev <= 1) {
             clearInterval(timer);
-            window.location.hash = '#';
+            window.location.href = '/';
             return 0;
           }
           return prev - 1;
@@ -157,7 +157,7 @@ export default function ApplyPage({ hash }) {
           {/* Back Button */}
           <div style={{ marginBottom: '24px' }}>
             <a 
-              href="#" 
+              href="/" 
               style={{ 
                 display: 'inline-flex', 
                 alignItems: 'center', 
@@ -421,7 +421,7 @@ export default function ApplyPage({ hash }) {
                 </div>
 
                 <a 
-                  href="#" 
+                  href="/" 
                   className="btn btn-secondary"
                   style={{ width: '100%', padding: '12px', marginTop: '10px' }}
                 >

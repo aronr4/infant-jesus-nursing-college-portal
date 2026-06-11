@@ -155,7 +155,7 @@ export default function Hero() {
               variants={itemVariants}
               style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '8px' }}
             >
-              <a href="#apply" className="btn btn-primary" style={{ padding: '14px 32px' }}>
+              <a href="/apply" className="btn btn-primary" style={{ padding: '14px 32px' }}>
                 Apply Now <ArrowRight size={18} />
               </a>
               <a href="#courses" className="btn btn-secondary" style={{ padding: '14px 32px' }}>

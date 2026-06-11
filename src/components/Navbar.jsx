@@ -23,7 +23,7 @@ export default function Navbar() {
     isProgrammaticScroll.current = true;
     
     // Update page title immediately
-    if (!window.location.hash.startsWith('#apply')) {
+    if (!window.location.pathname.startsWith('/apply')) {
       if (sectionId === 'home') {
         document.title = "Infant Jesus Nursing College | Kalayarkovil | Free Hostel | Govt Approved";
       } else {
@@ -46,7 +46,7 @@ export default function Navbar() {
     // Fallback if none is active (e.g. at the top of the page)
     const handleScrollTitle = () => {
       if (isProgrammaticScroll.current) return;
-      if (window.scrollY < 150 && !window.location.hash.startsWith('#apply')) {
+      if (window.scrollY < 150 && !window.location.pathname.startsWith('/apply')) {
         setActiveSection('home');
         document.title = "Infant Jesus Nursing College | Kalayarkovil | Free Hostel | Govt Approved";
       }
@@ -67,7 +67,7 @@ export default function Navbar() {
           setActiveSection(id);
           
           // Update page title
-          if (!window.location.hash.startsWith('#apply')) {
+          if (!window.location.pathname.startsWith('/apply')) {
             const rawTitle = id.replace(/-/g, ' ');
             const title = rawTitle.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
             document.title = `${title} | Infant Jesus Nursing College`;
@@ -169,10 +169,10 @@ export default function Navbar() {
 
           {/* Logo Brand */}
           <a 
-            href="#" 
+            href="/" 
             onClick={(e) => {
-              if (window.location.hash.startsWith('#apply')) {
-                window.location.hash = '#';
+              if (window.location.pathname.startsWith('/apply') || window.location.pathname.startsWith('/admin')) {
+                // Let the browser do a standard navigation back to homepage
               } else {
                 e.preventDefault();
                 handleNavClick('home');
@@ -227,7 +227,7 @@ export default function Navbar() {
           <nav className="desktop-only" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             {menuItems.map((item) => {
               const sectionId = item.href.replace('#', '');
-              const isActive = activeSection === sectionId && !window.location.hash.startsWith('#apply');
+              const isActive = activeSection === sectionId && !window.location.pathname.startsWith('/apply');
               return (
                 <a
                   key={item.label}
@@ -289,7 +289,7 @@ export default function Navbar() {
 
             {/* Apply Now CTA */}
             <a
-              href="#apply"
+              href="/apply"
               className="btn btn-primary desktop-only"
               style={{ padding: '10px 20px', fontSize: '0.875rem' }}
             >
@@ -353,7 +353,7 @@ export default function Navbar() {
 
             {menuItems.map((item) => {
               const sectionId = item.href.replace('#', '');
-              const isActive = activeSection === sectionId && !window.location.hash.startsWith('#apply');
+              const isActive = activeSection === sectionId && !window.location.pathname.startsWith('/apply');
               return (
                 <a
                   key={item.label}
@@ -373,7 +373,7 @@ export default function Navbar() {
               );
             })}
             <a
-              href="#apply"
+              href="/apply"
               onClick={() => setIsMobileMenuOpen(false)}
               className="btn btn-primary"
               style={{ width: '100%', marginTop: '8px' }}

@@ -188,7 +188,7 @@ function CourseModal({ course, onClose }) {
 
           {/* Apply CTA */}
           <a
-            href={`#apply?course=${course.code}`}
+            href={`/apply?course=${course.code}`}
             onClick={onClose}
             className="btn btn-primary"
             style={{ width: '100%', marginTop: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}

@@ -149,8 +149,10 @@ export default function Footer() {
             gap: '16px'
           }}
         >
-          <div>
-            &copy; {currentYear} Infant Jesus Nursing College. All rights reserved.
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <span>&copy; {currentYear} Infant Jesus Nursing College. All rights reserved.</span>
+            <span style={{ color: '#334155' }}>|</span>
+            <a href="/admin" style={{ color: '#64748B', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 600 }} className="footer-link-hover">Staff Portal</a>
           </div>
           
           {/* Social Icons */}
