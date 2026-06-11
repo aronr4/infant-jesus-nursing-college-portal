@@ -31,8 +31,8 @@ export default function Footer() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#FFFFFF' }}>
               <div style={{
-                width: '70px',
-                height: '70px',
+                width: '90px',
+                height: '90px',
                 borderRadius: '50%',
                 overflow: 'hidden',
                 flexShrink: 0

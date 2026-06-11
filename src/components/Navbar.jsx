@@ -184,8 +184,8 @@ export default function Navbar() {
             <div 
               style={{
                 position: 'relative',
-                width: isScrolled ? '50px' : '62px',
-                height: isScrolled ? '50px' : '62px',
+                width: isScrolled ? '60px' : '78px',
+                height: isScrolled ? '60px' : '78px',
                 flexShrink: 0,
                 borderRadius: '50%',
                 overflow: 'hidden',

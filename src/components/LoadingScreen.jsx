@@ -93,7 +93,7 @@ export default function LoadingScreen() {
           <div style={{ textAlign: 'center', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1 }}>
             
             {/* Concentric Logo Frame with pulsing rings */}
-            <div style={{ position: 'relative', width: '130px', height: '130px', marginBottom: '32px' }}>
+            <div style={{ position: 'relative', width: '180px', height: '180px', marginBottom: '32px' }}>
               
               {/* Radiating Ring 1 */}
               <motion.div
@@ -134,8 +134,8 @@ export default function LoadingScreen() {
                   left: '-8px',
                   right: '-8px',
                   bottom: '-8px',
-                  width: '146px',
-                  height: '146px',
+                  width: '196px',
+                  height: '196px',
                   pointerEvents: 'none'
                 }}
               >
