@@ -152,15 +152,15 @@ export default function LoadingScreen() {
                 />
               </motion.div>
               
-              {/* Main Logo Container (Assembles and snaps) */}
+              {/* Main Logo Container (Premium Spring & Spin Entry) */}
               <motion.div
-                initial={{ scale: 0.6, opacity: 0 }}
-                animate={{ 
-                  scale: [0.6, 1.06, 1], 
-                  opacity: 1 
-                }}
+                initial={{ scale: 0.1, rotate: -270, opacity: 0 }}
+                animate={{ scale: 1, rotate: 0, opacity: 1 }}
                 transition={{ 
-                  scale: { type: 'spring', stiffness: 100, damping: 10, delay: 0.1 }
+                  type: 'spring', 
+                  stiffness: 75, 
+                  damping: 13, 
+                  delay: 0.15 
                 }}
                 style={{
                   width: '100%',
@@ -169,64 +169,28 @@ export default function LoadingScreen() {
                   backgroundColor: '#FFFFFF',
                   border: '3px solid var(--primary)',
                   padding: '10px',
-                  boxShadow: '0 10px 35px rgba(10, 102, 194, 0.3)',
+                  boxShadow: '0 12px 40px rgba(10, 102, 194, 0.25)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   overflow: 'hidden',
-                  position: 'relative'
+                  position: 'relative',
+                  zIndex: 2
                 }}
               >
-                {/* Logo Image Split Assembly */}
+                {/* Logo Image */}
                 <div style={{ position: 'relative', width: '90%', height: '90%', overflow: 'hidden', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  
-                  {/* Left Half sliding in */}
-                  <motion.div
-                    initial={{ x: -70, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ type: 'spring', stiffness: 85, damping: 10, delay: 0.15 }}
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      height: '100%',
-                      clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
+                  <img
+                    src="/logo.png"
+                    alt="College Logo"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML = '<div style="font-weight:900;color:var(--primary);font-size:1.5rem">IJ</div>';
                     }}
-                  >
-                    <img
-                      src="/logo.png"
-                      alt="Logo Left half"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                  </motion.div>
-
-                  {/* Right Half sliding in */}
-                  <motion.div
-                    initial={{ x: 70, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ type: 'spring', stiffness: 85, damping: 10, delay: 0.15 }}
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      height: '100%',
-                      clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    <img
-                      src="/logo.png"
-                      alt="Logo Right half"
-                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                  </motion.div>
+                  />
                   
-                  {/* Shimmer sweep after snap */}
+                  {/* Premium Diagonal Glint Shimmer Overlay */}
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -238,7 +202,7 @@ export default function LoadingScreen() {
                       width: '100%',
                       height: '100%',
                       background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0) 100%)',
-                      zIndex: 2,
+                      zIndex: 3,
                       animation: 'logo-glint 2s infinite linear 0.8s',
                       pointerEvents: 'none'
                     }}
@@ -248,31 +212,30 @@ export default function LoadingScreen() {
 
               {/* Snap Flash impact wave overlay */}
               <motion.div
-                initial={{ scale: 0.5, opacity: 0 }}
-                animate={{ scale: [0.5, 1.8, 2.2], opacity: [0, 0.9, 0] }}
-                transition={{ duration: 0.75, delay: 0.7, ease: 'easeOut' }}
+                initial={{ scale: 0.4, opacity: 0 }}
+                animate={{ scale: [0.4, 1.8, 2.3], opacity: [0, 0.95, 0] }}
+                transition={{ duration: 0.85, delay: 0.7, ease: 'easeOut' }}
                 style={{
                   position: 'absolute',
                   top: 0, left: 0, right: 0, bottom: 0,
                   borderRadius: '50%',
-                  backgroundColor: 'rgba(255,255,255,0.9)',
+                  backgroundColor: 'rgba(255,255,255,0.95)',
                   boxShadow: '0 0 30px var(--primary), 0 0 60px var(--primary-light)',
                   pointerEvents: 'none',
-                  zIndex: 3
+                  zIndex: 1
                 }}
               />
             </div>
 
-            {/* Typography brand names (Assembles from left and right) */}
+            {/* Typography brand names (Deblurring and condensing letter-spacing) */}
             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', overflow: 'hidden', height: '36px', marginBottom: '4px' }}>
               <motion.h2
-                initial={{ x: -120, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 90, damping: 12, delay: 0.45 }}
+                initial={{ y: 20, opacity: 0, filter: 'blur(8px)', letterSpacing: '0.25em' }}
+                animate={{ y: 0, opacity: 1, filter: 'blur(0px)', letterSpacing: '0.04em' }}
+                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
                 style={{ 
                   fontSize: '1.9rem', 
                   fontWeight: 900,
-                  letterSpacing: '0.04em',
                   textTransform: 'uppercase',
                   background: 'linear-gradient(90deg, var(--text-primary) 0%, var(--primary) 50%, var(--text-primary) 100%)',
                   backgroundSize: '200% auto',
@@ -284,13 +247,12 @@ export default function LoadingScreen() {
                 INFANT
               </motion.h2>
               <motion.h2
-                initial={{ x: 120, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 90, damping: 12, delay: 0.45 }}
+                initial={{ y: 20, opacity: 0, filter: 'blur(8px)', letterSpacing: '0.25em' }}
+                animate={{ y: 0, opacity: 1, filter: 'blur(0px)', letterSpacing: '0.04em' }}
+                transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.45 }}
                 style={{ 
                   fontSize: '1.9rem', 
                   fontWeight: 900,
-                  letterSpacing: '0.04em',
                   textTransform: 'uppercase',
                   background: 'linear-gradient(90deg, var(--text-primary) 0%, var(--primary) 50%, var(--text-primary) 100%)',
                   backgroundSize: '200% auto',
@@ -304,9 +266,9 @@ export default function LoadingScreen() {
             </div>
             
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.55 }}
+              initial={{ opacity: 0, y: 15, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ delay: 0.7, duration: 0.7, ease: 'easeOut' }}
               style={{ 
                 color: 'var(--primary)', 
                 fontSize: '0.85rem',
