@@ -324,7 +324,7 @@ export default function AdminPanel() {
         <div style={{ paddingBottom: '60px' }}>
           
           {/* Header */}
-          <header className="glass-panel" style={{ position: 'sticky', top: 0, zIndex: 100, borderBottom: '1px solid var(--border)', padding: '16px 0' }}>
+          <header style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'var(--bg-primary)', borderBottom: '1px solid var(--border)', padding: '16px 0', boxShadow: 'var(--shadow-sm)' }}>
             <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <div style={{ width: '54px', height: '54px', borderRadius: '50%', overflow: 'hidden', flexShrink: 0 }}>

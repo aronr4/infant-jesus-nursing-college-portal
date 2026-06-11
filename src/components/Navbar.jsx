@@ -153,16 +153,13 @@ export default function Navbar() {
 
       {/* Main Sticky Navbar */}
       <header
-        className="glass-panel"
         style={{
           position: 'sticky',
           top: 0,
           zIndex: 1000,
           width: '100%',
           transition: 'all 0.3s ease',
-          background: 'var(--glass-bg)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          backgroundColor: 'var(--bg-primary)',
           padding: isScrolled ? '10px 0' : '14px 0',
           borderBottom: '1px solid var(--border)',
           boxShadow: isScrolled ? 'var(--shadow-md)' : 'none',
