@@ -180,9 +180,7 @@ export default function LoadingScreen() {
                   style={{ 
                     width: '100%', 
                     height: '100%', 
-                    objectFit: 'contain',
-                    imageRendering: '-webkit-optimize-contrast',
-                    imageRendering: 'crisp-edges'
+                    objectFit: 'contain'
                   }}
                   onError={(e) => {
                     e.target.style.display = 'none';

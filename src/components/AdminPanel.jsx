@@ -334,9 +334,7 @@ export default function AdminPanel() {
                     style={{ 
                       width: '100%', 
                       height: '100%', 
-                      objectFit: 'contain',
-                      imageRendering: '-webkit-optimize-contrast',
-                      imageRendering: 'crisp-edges'
+                      objectFit: 'contain'
                     }} 
                   />
                 </div>

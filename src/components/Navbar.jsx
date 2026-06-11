@@ -202,8 +202,6 @@ export default function Navbar() {
                   objectFit: 'contain',
                   objectPosition: 'center',
                   display: 'block',
-                  imageRendering: '-webkit-optimize-contrast',
-                  imageRendering: 'crisp-edges',
                   backfaceVisibility: 'hidden',
                   transform: 'translateZ(0)'
                 }}

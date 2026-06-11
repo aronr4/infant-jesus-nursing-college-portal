@@ -45,9 +45,7 @@ export default function Footer() {
                     height: '100%',
                     objectFit: 'contain',
                     objectPosition: 'center',
-                    display: 'block',
-                    imageRendering: '-webkit-optimize-contrast',
-                    imageRendering: 'crisp-edges'
+                    display: 'block'
                   }}
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
