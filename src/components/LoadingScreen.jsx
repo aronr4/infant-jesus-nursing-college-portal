@@ -3,28 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function LoadingScreen() {
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Increment progress smoothly to simulate active file caching
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          const exitTimer = setTimeout(() => {
-            setLoading(false);
-          }, 300); // Small pause at 100% for smooth exit
-          return 100;
-        }
-        // Increment by random steps (between 5% and 15%) for a realistic feel
-        const increment = Math.floor(Math.random() * 10) + 5;
-        return Math.min(prev + increment, 100);
-      });
-    }, 90);
+    // Auto-dismiss loading screen after animations complete
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1600);
 
-    return () => {
-      clearInterval(interval);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Lock scrolling while loading screen is active
@@ -66,9 +52,9 @@ export default function LoadingScreen() {
             overflow: 'hidden'
           }}
         >
-          {/* Floating Ambient Sparkles/Particles */}
+          {/* Floating Ambient Sparkles */}
           <div style={{ position: 'absolute', width: '100%', height: '100%', top: 0, left: 0, pointerEvents: 'none', zIndex: 0 }}>
-            {[...Array(12)].map((_, i) => {
+            {[...Array(10)].map((_, i) => {
               const size = Math.random() * 4 + 3;
               const delay = Math.random() * 1.5;
               const duration = Math.random() * 2.5 + 2.5;
@@ -78,7 +64,7 @@ export default function LoadingScreen() {
                   key={i}
                   initial={{ opacity: 0, y: '60vh', x: xOffset }}
                   animate={{ 
-                    opacity: [0, 0.65, 0], 
+                    opacity: [0, 0.6, 0], 
                     y: '-50vh',
                     x: xOffset + (Math.random() - 0.5) * 60
                   }}
@@ -111,8 +97,9 @@ export default function LoadingScreen() {
               
               {/* Radiating Ring 1 */}
               <motion.div
+                initial={{ scale: 0.6, opacity: 0 }}
                 animate={{ scale: [1, 1.45, 1], opacity: [0.4, 0, 0.4] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
                 style={{
                   position: 'absolute',
                   top: 0, left: 0, right: 0, bottom: 0,
@@ -124,8 +111,9 @@ export default function LoadingScreen() {
               
               {/* Radiating Ring 2 */}
               <motion.div
+                initial={{ scale: 0.6, opacity: 0 }}
                 animate={{ scale: [1, 1.75, 1], opacity: [0.2, 0, 0.2] }}
-                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 0.7 }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
                 style={{
                   position: 'absolute',
                   top: 0, left: 0, right: 0, bottom: 0,
@@ -135,33 +123,44 @@ export default function LoadingScreen() {
                 }}
               />
 
-              {/* High-Tech Spinning Dashed Outer Border Tracker */}
+              {/* High-Tech Dashed Outer Border (Entry assembly from top) */}
               <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                initial={{ y: -120, opacity: 0 }}
+                animate={{ y: 0, opacity: 0.7 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 12, delay: 0.4 }}
                 style={{
                   position: 'absolute',
                   top: '-8px',
                   left: '-8px',
                   right: '-8px',
                   bottom: '-8px',
-                  borderRadius: '50%',
-                  border: '2px dashed var(--primary)',
-                  opacity: 0.7,
+                  width: '146px',
+                  height: '146px',
                   pointerEvents: 'none'
                 }}
-              />
+              >
+                {/* Spinning Loop */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '50%',
+                    border: '2px dashed var(--primary)'
+                  }}
+                />
+              </motion.div>
               
-              {/* Main Logo Container (Slow Breathing scale loop) */}
+              {/* Main Logo Container (Assembles and snaps) */}
               <motion.div
-                initial={{ scale: 0.75, opacity: 0 }}
+                initial={{ scale: 0.6, opacity: 0 }}
                 animate={{ 
-                  scale: [1, 1.04, 1], 
+                  scale: [0.6, 1.06, 1], 
                   opacity: 1 
                 }}
                 transition={{ 
-                  initial: { type: 'spring', stiffness: 100, damping: 10 },
-                  scale: { duration: 4, repeat: Infinity, ease: 'easeInOut' }
+                  scale: { type: 'spring', stiffness: 100, damping: 10, delay: 0.1 }
                 }}
                 style={{
                   width: '100%',
@@ -178,27 +177,60 @@ export default function LoadingScreen() {
                   position: 'relative'
                 }}
               >
-                {/* Logo Image */}
+                {/* Logo Image Split Assembly */}
                 <div style={{ position: 'relative', width: '90%', height: '90%', overflow: 'hidden', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <motion.img
-                    src="/logo.png"
-                    alt="College Logo"
-                    animate={{ rotate: [0, 4, -4, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  
+                  {/* Left Half sliding in */}
+                  <motion.div
+                    initial={{ x: -70, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 85, damping: 10, delay: 0.15 }}
                     style={{
+                      position: 'absolute',
                       width: '100%',
                       height: '100%',
-                      objectFit: 'contain',
-                      zIndex: 1
+                      clipPath: 'polygon(0 0, 50% 0, 50% 100%, 0 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.parentElement.innerHTML = '<div style="font-weight:900;color:var(--primary);font-size:1.5rem">IJ</div>';
+                  >
+                    <img
+                      src="/logo.png"
+                      alt="Logo Left half"
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                  </motion.div>
+
+                  {/* Right Half sliding in */}
+                  <motion.div
+                    initial={{ x: 70, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 85, damping: 10, delay: 0.15 }}
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: '100%',
+                      clipPath: 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}
-                  />
+                  >
+                    <img
+                      src="/logo.png"
+                      alt="Logo Right half"
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                  </motion.div>
                   
-                  {/* Premium Diagonal Glint Shimmer Overlay */}
-                  <div 
+                  {/* Shimmer sweep after snap */}
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
                     style={{
                       position: 'absolute',
                       top: 0,
@@ -207,89 +239,85 @@ export default function LoadingScreen() {
                       height: '100%',
                       background: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0) 100%)',
                       zIndex: 2,
-                      animation: 'logo-glint 2s infinite linear',
+                      animation: 'logo-glint 2s infinite linear 0.8s',
                       pointerEvents: 'none'
                     }}
                   />
                 </div>
               </motion.div>
+
+              {/* Snap Flash impact wave overlay */}
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: [0.5, 1.8, 2.2], opacity: [0, 0.9, 0] }}
+                transition={{ duration: 0.75, delay: 0.7, ease: 'easeOut' }}
+                style={{
+                  position: 'absolute',
+                  top: 0, left: 0, right: 0, bottom: 0,
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(255,255,255,0.9)',
+                  boxShadow: '0 0 30px var(--primary), 0 0 60px var(--primary-light)',
+                  pointerEvents: 'none',
+                  zIndex: 3
+                }}
+              />
             </div>
 
-            {/* Typography brand names (Metallic shining text-sweep) */}
-            <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5, type: 'spring' }}
-              style={{ 
-                fontSize: '1.9rem', 
-                fontWeight: 900,
-                marginBottom: '4px',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                background: 'linear-gradient(90deg, var(--text-primary) 0%, var(--primary) 50%, var(--text-primary) 100%)',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                animation: 'text-sweep 2.8s infinite linear'
-              }}
-            >
-              INFANT JESUS
-            </motion.h2>
+            {/* Typography brand names (Assembles from left and right) */}
+            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', overflow: 'hidden', height: '36px', marginBottom: '4px' }}>
+              <motion.h2
+                initial={{ x: -120, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 12, delay: 0.45 }}
+                style={{ 
+                  fontSize: '1.9rem', 
+                  fontWeight: 900,
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  background: 'linear-gradient(90deg, var(--text-primary) 0%, var(--primary) 50%, var(--text-primary) 100%)',
+                  backgroundSize: '200% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  animation: 'text-sweep 2.8s infinite linear'
+                }}
+              >
+                INFANT
+              </motion.h2>
+              <motion.h2
+                initial={{ x: 120, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ type: 'spring', stiffness: 90, damping: 12, delay: 0.45 }}
+                style={{ 
+                  fontSize: '1.9rem', 
+                  fontWeight: 900,
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  background: 'linear-gradient(90deg, var(--text-primary) 0%, var(--primary) 50%, var(--text-primary) 100%)',
+                  backgroundSize: '200% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  animation: 'text-sweep 2.8s infinite linear'
+                }}
+              >
+                JESUS
+              </motion.h2>
+            </div>
             
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 0.5 }}
+              transition={{ delay: 0.7, duration: 0.55 }}
               style={{ 
                 color: 'var(--primary)', 
                 fontSize: '0.85rem',
                 fontWeight: 800,
                 textTransform: 'uppercase',
                 letterSpacing: '0.18em',
-                marginBottom: '32px'
+                marginBottom: '0px'
               }}
             >
               Nursing &amp; Paramedical College
             </motion.p>
-
-            {/* Elegant Progress bar & Loading metadata */}
-            <div style={{ width: '220px' }}>
-              <div style={{ 
-                width: '100%', 
-                height: '4px', 
-                backgroundColor: 'var(--border)', 
-                borderRadius: '4px',
-                overflow: 'hidden',
-                position: 'relative'
-              }}>
-                <motion.div 
-                  style={{ 
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    bottom: 0,
-                    width: `${progress}%`,
-                    background: 'linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%)',
-                    borderRadius: '4px'
-                  }}
-                />
-              </div>
-              
-              <div style={{ 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'center', 
-                marginTop: '10px',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                color: 'var(--text-light)',
-                letterSpacing: '0.04em'
-              }}>
-                <span>INITIALIZING INTERFACE</span>
-                <span style={{ color: 'var(--primary)', fontWeight: 800 }}>{progress}%</span>
-              </div>
-            </div>
-            
           </div>
           
           {/* Keyframe animations injected */}
