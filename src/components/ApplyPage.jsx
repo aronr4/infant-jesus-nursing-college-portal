@@ -203,7 +203,7 @@ export default function ApplyPage({ hash }) {
               Online Application Portal
             </h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', margin: 0 }}>
-              Apply for direct admissions for academic session 2025–2026.
+              Apply for direct admissions for academic session 2026–2027.
             </p>
           </div>
 

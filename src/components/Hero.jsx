@@ -97,7 +97,7 @@ export default function Hero() {
               }}
             >
               <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: 'var(--primary)', borderRadius: '50%', animation: 'ping 1.5s infinite' }} />
-              Admissions Open 2025–2026
+              Admissions Open 2026–2027
             </motion.div>
 
             {/* Main Headline */}

@@ -178,7 +178,7 @@ export default function InquiryModal() {
                   <GraduationCap size={20} />
                 </div>
                 <h3 style={{ color: '#FFFFFF', margin: 0, fontSize: '1.25rem', fontWeight: 700 }}>
-                  Admission Enquiry 2025-2026
+                  Admission Enquiry 2026-2027
                 </h3>
               </div>
               <p style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '0.85rem', margin: 0 }}>
