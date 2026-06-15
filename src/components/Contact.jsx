@@ -199,7 +199,7 @@ export default function Contact() {
               <div 
                 style={{ 
                   display: 'grid', 
-                  gridTemplateColumns: 'repeat(2, 1fr)', 
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
                   gap: '12px' 
                 }}
                 className="contact-helpline-grid"
@@ -211,8 +211,9 @@ export default function Contact() {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '8px',
-                      padding: '10px 14px',
+                      padding: '10px 10px',
                       backgroundColor: 'var(--bg-secondary)',
                       borderRadius: '8px',
                       border: '1px solid var(--border)',
@@ -290,7 +291,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-card"
+            className="glass-card contact-form-card"
             style={{
               padding: '32px',
               borderRadius: 'var(--radius-lg)',
@@ -429,6 +430,11 @@ export default function Contact() {
           transform: translateY(-2px);
         }
         @media (max-width: 768px) {
+          .contact-form-card {
+            padding: 24px 20px !important;
+          }
+        }
+        @media (max-width: 480px) {
           .contact-helpline-grid {
             grid-template-columns: 1fr !important;
           }

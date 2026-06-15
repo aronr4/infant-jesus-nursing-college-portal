@@ -145,7 +145,7 @@ export default function Placement() {
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="glass-panel"
+          className="glass-panel placement-cta-panel"
           style={{
             padding: '32px',
             borderRadius: 'var(--radius-lg)',
@@ -155,7 +155,6 @@ export default function Placement() {
             alignItems: 'center',
             boxShadow: 'var(--shadow-lg)'
           }}
-          className="placement-cta-panel"
         >
           <div 
             style={{

@@ -272,7 +272,7 @@ export default function Hero() {
                 boxShadow: 'var(--shadow-lg)'
               }}
             >
-              <div style={{ backgroundColor: 'var(--success-light)', color: 'var(--success)', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyCenter: 'center', padding: '6px' }}>
+              <div style={{ backgroundColor: 'var(--success-light)', color: 'var(--success)', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px' }}>
                 <ShieldCheck size={20} />
               </div>
               <div>
@@ -298,7 +298,7 @@ export default function Hero() {
                 boxShadow: 'var(--shadow-lg)'
               }}
             >
-              <div style={{ backgroundColor: 'var(--accent-light)', color: 'var(--accent)', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyCenter: 'center', padding: '6px' }}>
+              <div style={{ backgroundColor: 'var(--accent-light)', color: 'var(--accent)', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6px' }}>
                 <Stethoscope size={20} />
               </div>
               <div>
