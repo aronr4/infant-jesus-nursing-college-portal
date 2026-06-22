@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, MessageSquare, Send, CheckCircle2, MailOpen } from 'lucide-react';
+import { MapPin, Phone, MessageSquare, Send, CheckCircle2, MailOpen, ExternalLink, Home } from 'lucide-react';
 import { supabase } from '../utils/supabaseClient';
 
 export default function Contact() {
@@ -8,6 +8,7 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [activeMap, setActiveMap] = useState('college');
 
   const phoneNumbers = ['9159417945', '9585417945', '9655757134', '9585116455'];
   const primaryPhone = '9159417945';
@@ -95,7 +96,7 @@ export default function Contact() {
           {/* Left Column: Address, Contact Info, Map */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
             
-            {/* Address Card */}
+            {/* College Campus Address Card */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -123,15 +124,98 @@ export default function Contact() {
               >
                 <MapPin size={24} />
               </div>
-              <div>
+              <div style={{ flex: 1 }}>
                 <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '6px', color: 'var(--text-primary)' }}>
                   College Campus Address
                 </h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5', margin: 0 }}>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '12px' }}>
                   Raj Complex, Near Venkateswara Theater,<br />
                   Kallal Road, Kalayarkovil,<br />
                   Sivaganga District, Tamil Nadu
                 </p>
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Infant+Jesus+Nursing+College+Kalaiyarkoil"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    color: 'var(--primary)',
+                    textDecoration: 'none',
+                    backgroundColor: 'var(--primary-light)',
+                    padding: '6px 12px',
+                    borderRadius: '6px',
+                    transition: 'all 0.2s'
+                  }}
+                  className="open-map-btn"
+                >
+                  <ExternalLink size={12} /> Open Map
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Hostel Location Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.05 }}
+              className="glass-card contact-detail-card"
+              style={{
+                padding: '24px',
+                borderRadius: 'var(--radius-md)',
+                backgroundColor: 'var(--bg-primary)',
+                border: '1px solid var(--border)',
+                display: 'flex',
+                gap: '16px',
+                alignItems: 'flex-start'
+              }}
+            >
+              <div 
+                style={{
+                  backgroundColor: 'var(--primary-light)',
+                  color: 'var(--primary)',
+                  padding: '12px',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  flexShrink: 0
+                }}
+              >
+                <Home size={24} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '6px', color: 'var(--text-primary)' }}>
+                  Student Hostel Location
+                </h3>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.5', marginBottom: '12px' }}>
+                  Infant Jesus Nursing Hostel,<br />
+                  Near College Campus, Kalayarkoil,<br />
+                  Sivaganga District, Tamil Nadu
+                </p>
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Infant+Jesus+Nursing+Hostel+Kalaiyarkoil"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    color: 'var(--primary)',
+                    textDecoration: 'none',
+                    backgroundColor: 'var(--primary-light)',
+                    padding: '6px 12px',
+                    borderRadius: '6px',
+                    transition: 'all 0.2s'
+                  }}
+                  className="open-map-btn"
+                >
+                  <ExternalLink size={12} /> Open Map
+                </a>
               </div>
             </motion.div>
 
@@ -140,7 +224,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.15 }}
+              transition={{ delay: 0.1 }}
               className="glass-card contact-detail-card"
               style={{
                 padding: '24px',
@@ -183,7 +267,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
+              transition={{ delay: 0.15 }}
               className="glass-card contact-detail-card"
               style={{
                 padding: '24px',
@@ -256,7 +340,7 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Google Map Iframe */}
+            {/* Google Map Tabbed Container */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -264,24 +348,93 @@ export default function Contact() {
               transition={{ delay: 0.2 }}
               style={{
                 width: '100%',
-                height: '240px',
                 borderRadius: 'var(--radius-md)',
                 overflow: 'hidden',
                 boxShadow: 'var(--shadow-md)',
-                border: '1px solid var(--border)'
+                border: '1px solid var(--border)',
+                backgroundColor: 'var(--bg-primary)'
               }}
             >
-              {/* Embed map of Kalayarkovil */}
-              <iframe
-                title="College Location Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15715.111802958085!2d78.6186855146033!3d9.952402127116805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b00eb05877f6cdb%3A0xcb1b590e82c58971!2sKalayarkoil%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1717772023023!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              {/* Map Tabs */}
+              <div style={{
+                display: 'flex',
+                borderBottom: '1px solid var(--border)',
+                backgroundColor: 'var(--bg-secondary)'
+              }}>
+                <button
+                  type="button"
+                  onClick={() => setActiveMap('college')}
+                  style={{
+                    flex: 1,
+                    padding: '12px 16px',
+                    border: 'none',
+                    background: activeMap === 'college' ? 'var(--bg-primary)' : 'transparent',
+                    borderBottom: activeMap === 'college' ? '2px solid var(--primary)' : '2px solid transparent',
+                    color: activeMap === 'college' ? 'var(--primary)' : 'var(--text-secondary)',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <MapPin size={16} /> College Map
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveMap('hostel')}
+                  style={{
+                    flex: 1,
+                    padding: '12px 16px',
+                    border: 'none',
+                    background: activeMap === 'hostel' ? 'var(--bg-primary)' : 'transparent',
+                    borderBottom: activeMap === 'hostel' ? '2px solid var(--primary)' : '2px solid transparent',
+                    color: activeMap === 'hostel' ? 'var(--primary)' : 'var(--text-secondary)',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <Home size={16} /> Hostel Map
+                </button>
+              </div>
+
+              {/* Map Iframe Content */}
+              <div style={{ height: '240px', width: '100%', position: 'relative' }}>
+                {activeMap === 'college' ? (
+                  <iframe
+                    key="college-map"
+                    title="College Location Map"
+                    src="https://maps.google.com/maps?q=Infant%20Jesus%20Nursing%20College%20Kalaiyarkoil&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                ) : (
+                  <iframe
+                    key="hostel-map"
+                    title="Hostel Location Map"
+                    src="https://maps.google.com/maps?q=Infant%20Jesus%20Nursing%20Hostel%20Kalaiyarkoil&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                )}
+              </div>
             </motion.div>
 
           </div>
@@ -428,6 +581,11 @@ export default function Contact() {
         .whatsapp-btn-hover:hover {
           background-color: #1ebd59 !important;
           transform: translateY(-2px);
+        }
+        .open-map-btn:hover {
+          background-color: var(--primary) !important;
+          color: #FFFFFF !important;
+          transform: translateY(-1px);
         }
         @media (max-width: 768px) {
           .contact-form-card {
