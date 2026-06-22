@@ -100,7 +100,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="glass-card"
+              className="glass-card contact-detail-card"
               style={{
                 padding: '24px',
                 borderRadius: 'var(--radius-md)',
@@ -141,7 +141,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.15 }}
-              className="glass-card"
+              className="glass-card contact-detail-card"
               style={{
                 padding: '24px',
                 borderRadius: 'var(--radius-md)',
@@ -170,7 +170,7 @@ export default function Contact() {
                 </h3>
                 <a 
                   href="mailto:admission.infantjesusnursing@gmail.com"
-                  style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--primary)', textDecoration: 'none' }}
+                  style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--primary)', textDecoration: 'none', wordBreak: 'break-all' }}
                   className="email-link-hover"
                 >
                   admission.infantjesusnursing@gmail.com
@@ -184,7 +184,7 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="glass-card"
+              className="glass-card contact-detail-card"
               style={{
                 padding: '24px',
                 borderRadius: 'var(--radius-md)',
@@ -433,8 +433,10 @@ export default function Contact() {
           .contact-form-card {
             padding: 24px 20px !important;
           }
-        }
-        @media (max-width: 480px) {
+          .contact-detail-card {
+            padding: 20px 16px !important;
+            gap: 12px !important;
+          }
           .contact-helpline-grid {
             grid-template-columns: 1fr !important;
           }
